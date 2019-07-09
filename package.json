@@ -1,0 +1,23 @@
+{
+  "name": "warehouse-companies",
+  "version": "1.0.0",
+  "description": "Helper methods to create initial share ledgers for warehouse companies using Reguity",
+  "main": "createShareLedgerEventsParams.js",
+  "dependencies": {
+    "jest": "^24.8.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Reguity/warehouse-companies.git"
+  },
+  "author": "Reguity Group AB (publ)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Reguity/warehouse-companies/issues"
+  },
+  "homepage": "https://github.com/Reguity/warehouse-companies#readme"
+}
