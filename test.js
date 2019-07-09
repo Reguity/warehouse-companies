@@ -494,11 +494,11 @@ test('Two owners. New issuing of 1300 with different proportions.', () => {
     date: "2018-01-02T00:00:00.000Z",
     shareholdingChanges: [{
       startNr: 1001,
-      stopNr: 1522,
+      stopNr: 1521,
       shareownerId: "2",
       sharetypeId: 55
     }, {
-      startNr: 1523,
+      startNr: 1522,
       stopNr: 2000,
       shareownerId: "3",
       sharetypeId: 55
@@ -532,10 +532,10 @@ test('Two owners. New issuing of 1300 with different proportions.', () => {
       firstRefusal: true
     }, {
       startNr: 1001,
-      stopNr: 1522,
+      stopNr: 1521,
       firstRefusal: true
     }, {
-      startNr: 1523,
+      startNr: 1522,
       stopNr: 2000,
       firstRefusal: true
     }, {

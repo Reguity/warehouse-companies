@@ -35,7 +35,7 @@ exports.createShareLedgerEventsParams = ({
   // Quotient value
   let q = startCapital / startQuantity;
 
-  // Calculate a proportionate distribution of shares via Sainte-Lagu�  ("J�mkade uddatalsmetoden")
+  // Calculate a proportionate distribution of shares via Sainte-Lague  ("Jämkade uddatalsmetoden")
   let fromShareissue = (endCapital - startCapital) / q;
   let keyMap = {
     fromTransaction: startQuantity,
@@ -49,19 +49,21 @@ exports.createShareLedgerEventsParams = ({
         fromTransaction: 0,
         fromShareissue: 0,
         fromSplit: 0,
+        receivedTotal: 0,
         quantity: t.quantity,
-        divisor: t.quantity
+        divisor: t.quantity / 1.2
       }
     }), {});
   Object.entries(keyMap).forEach(([k, v]) => {
-    Object.values(byShareownerId).forEach(obj => { obj.divisor = obj.quantity; });
+    //Object.values(byShareownerId).forEach(obj => { obj.divisor = obj.quantity / 1.2; });
     while (v > 0) {
       let shareowner = Object
         .entries(byShareownerId)
         .reduce((ack, [ shareownerId, obj ]) => ack.divisor > obj.divisor ? ack : obj, { divisor: 0 });
       shareowner[k]++;
+      shareowner.receivedTotal++;
       v--;
-      shareowner.divisor = shareowner.quantity / (2 * shareowner[k] + 1);
+      shareowner.divisor = shareowner.quantity / (2 * shareowner.receivedTotal + 1);
     }
   });
 
