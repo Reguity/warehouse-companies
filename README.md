@@ -25,7 +25,10 @@ one owner and one sharetype, given the following parameters:
 
 Using the following GraphQL Query:
 ```graphql
-mutation CreateShareLedgerEvent ($params: EventCreationInput!) { code message }
+mutation CreateShareLedgerEvent ($params: EventCreationInput!) {
+  code 
+  message
+}
 ```
 One just has to make this call using each element in the response from `createShareLedgerEventParams` as the value for variable `$params`.
 
