@@ -55,7 +55,6 @@ exports.createShareLedgerEventsParams = ({
       }
     }), {});
   Object.entries(keyMap).forEach(([k, v]) => {
-    //Object.values(byShareownerId).forEach(obj => { obj.divisor = obj.quantity / 1.2; });
     while (v > 0) {
       let shareowner = Object
         .entries(byShareownerId)
