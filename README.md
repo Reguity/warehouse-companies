@@ -20,20 +20,6 @@ one owner and one sharetype, given the following parameters:
 * **shareownerAndQuantityTuples** List of objects on the form `{ shareownerId, quantity }`, where `shareownerId` is the id of a new shareowner and quantity is the amount of shares that he/she should receive
 * **firstRefusal** Whether first refusal should be set
 
-# Usage with Reguity GraphQL API
-`createShareLedgerEventsParams` returns a list of parameters to feed as input consecutively into the `createShareLedgerEvent` mutation.
-
-Using the following GraphQL Query:
-```graphql
-mutation CreateShareLedgerEvent ($params: EventCreationInput!) {
-  createShareLedgerEvent (params: $params) {
-    code
-    message
-  }
-}
-```
-One just has to make this call using each element in the response from `createShareLedgerEventParams` as the value for variable `$params`.
-
 # Example call.
 **Scenario**: Warehouse company initially has 1000 shares and a share capital of 50000.
 Two shareowners want to buy it but end up owning 1200 and 1100 shares respectively, with a new share capital of 100000.
@@ -62,6 +48,7 @@ createShareLedgerEventsParams({
   }],
   firstRefusal: true
 });
+
 /*
   =>
   [{
@@ -161,3 +148,41 @@ createShareLedgerEventsParams({
   }]
 */
 ```
+
+# Usage with Reguity GraphQL API
+The response from `createShareLedgerEventsParams` is an array of parameters can used as consecutive calls to the `createShareLedgerEvent` mutation.
+One just has to iterate the response from `createShareLedgerEventParams`, and supply each element as the value for variable `$params`.
+
+#Example using graphql-request and the example call
+```js
+const { createShareLedgerEventsParams } = require('warehouse-companies');
+const { request } = require('graphql-request');
+const endpoint = 'https://api-dev.reguity.com';
+const query = `mutation CreateShareLedgerEvent ($params: EventCreationInput!) {
+  createShareLedgerEvent (params: $params) {
+    code
+    message
+  }
+}`;
+let result = createShareLedgerEventsParams({
+  companyId: "42",
+  sharetypeId: 55,
+  startCapital: 50000,
+  endCapital: 100000,
+  startQuantity: 1000,
+  firstShareownerId: "1",
+  firstDate: '2018-01-01T00:00:00.000Z',
+  endDate: '2018-01-02T00:00:00.000Z',
+  shareownerAndQuantityTuples: [{
+    shareownerId: "2",
+    quantity: 1200
+  }, {
+    shareownerId: "3",
+    quantity: 1100
+  }],
+  firstRefusal: true
+});
+result.reduce((ack, params) => ack.then(async () => request(endpoint, query, { params })), Promise.all([]));
+```
+
+Done!
