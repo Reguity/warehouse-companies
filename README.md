@@ -150,7 +150,7 @@ createShareLedgerEventsParams({
 ```
 
 # Usage with Reguity GraphQL API
-The response from `createShareLedgerEventsParams` is an array of parameters can used as consecutive calls to the `createShareLedgerEvent` mutation.
+The response from `createShareLedgerEventsParams` is an array of parameters that can used as consecutive calls to the `createShareLedgerEvent` mutation.
 One just has to iterate the response from `createShareLedgerEventParams`, and supply each element as the value for variable `$params`.
 
 #Example using graphql-request and the example call

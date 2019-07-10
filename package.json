@@ -1,6 +1,6 @@
 {
   "name": "warehouse-companies",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Helper methods to create initial share ledgers for warehouse companies using Reguity",
   "main": "createShareLedgerEventsParams.js",
   "dependencies": {
