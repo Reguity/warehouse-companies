@@ -182,7 +182,7 @@ let result = createShareLedgerEventsParams({
   }],
   firstRefusal: true
 });
-result.reduce((ack, params) => ack.then(async () => request(endpoint, query, { params })), Promise.all([]));
+result.reduce((ack, params) => ack.then(() => request(endpoint, query, { params })), Promise.all([]));
 ```
 
 Done!
